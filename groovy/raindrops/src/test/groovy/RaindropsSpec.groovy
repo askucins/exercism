@@ -14,7 +14,6 @@ class RaindropsSpec extends Specification {
         1      || '1'
     }
 
-    @Ignore
     def "3, being divisible by 3, returns 'Pling'"() {
         expect:
         raindrops.convert(number) == expected
@@ -24,7 +23,6 @@ class RaindropsSpec extends Specification {
         3      || 'Pling'
     }
 
-    @Ignore
     def "5, divisible by 5, returns 'Plang'"() {
         expect:
         raindrops.convert(number) == expected
@@ -34,7 +32,6 @@ class RaindropsSpec extends Specification {
         5      || 'Plang'
     }
 
-    @Ignore
     def "7, divisible by 7, returns 'Plong'"() {
         expect:
         raindrops.convert(number) == expected
@@ -44,7 +41,6 @@ class RaindropsSpec extends Specification {
         7      || 'Plong'
     }
 
-    @Ignore
     def "6, divisible by 3, returns 'Pling'"() {
         expect:
         raindrops.convert(number) == expected
@@ -54,7 +50,6 @@ class RaindropsSpec extends Specification {
         6      || 'Pling'
     }
 
-    @Ignore
     def "8 returns the string '8'"() {
         expect:
         raindrops.convert(number) == expected
@@ -64,7 +59,6 @@ class RaindropsSpec extends Specification {
         8      || '8'
     }
 
-    @Ignore
     def "9, divisible by 3, returns 'Pling'"() {
         expect:
         raindrops.convert(number) == expected
@@ -74,7 +68,6 @@ class RaindropsSpec extends Specification {
         9      || 'Pling'
     }
 
-    @Ignore
     def "10, divisible by 5, returns 'Plang'"() {
         expect:
         raindrops.convert(number) == expected
@@ -84,7 +77,6 @@ class RaindropsSpec extends Specification {
         10     || 'Plang'
     }
 
-    @Ignore
     def "14, divisible by 7, returns 'Plong'"() {
         expect:
         raindrops.convert(number) == expected
@@ -94,7 +86,6 @@ class RaindropsSpec extends Specification {
         14     || 'Plong'
     }
 
-    @Ignore
     def "15, divisible by both 3 and 5, returns 'PlingPlang'"() {
         expect:
         raindrops.convert(number) == expected
@@ -104,7 +95,6 @@ class RaindropsSpec extends Specification {
         15     || 'PlingPlang'
     }
 
-    @Ignore
     def "21, divisible by 3 and 7, returns 'PlingPlong'"() {
         expect:
         raindrops.convert(number) == expected
@@ -114,7 +104,6 @@ class RaindropsSpec extends Specification {
         21     || 'PlingPlong'
     }
 
-    @Ignore
     def "25, divisible by 5, returns 'Plang'"() {
         expect:
         raindrops.convert(number) == expected
@@ -124,7 +113,6 @@ class RaindropsSpec extends Specification {
         25     || 'Plang'
     }
 
-    @Ignore
     def "27, divisible by 3, returns 'Pling'"() {
         expect:
         raindrops.convert(number) == expected
@@ -134,7 +122,6 @@ class RaindropsSpec extends Specification {
         27     || 'Pling'
     }
 
-    @Ignore
     def "35, divisible by 5 and 7, returns 'PlangPlong'"() {
         expect:
         raindrops.convert(number) == expected
@@ -144,7 +131,6 @@ class RaindropsSpec extends Specification {
         35     || 'PlangPlong'
     }
 
-    @Ignore
     def "49, divisible by 7, returns 'Plong'"() {
         expect:
         raindrops.convert(number) == expected
@@ -154,7 +140,6 @@ class RaindropsSpec extends Specification {
         49     || 'Plong'
     }
 
-    @Ignore
     def "52 returns the string '52'"() {
         expect:
         raindrops.convert(number) == expected
@@ -164,7 +149,6 @@ class RaindropsSpec extends Specification {
         52     || '52'
     }
 
-    @Ignore
     def "105 returns 'PlingPlangPlong'"() {
         expect:
         raindrops.convert(number) == expected
@@ -174,7 +158,6 @@ class RaindropsSpec extends Specification {
         105    || 'PlingPlangPlong'
     }
 
-    @Ignore
     def "3125, divisible by 5, returns 'Plang'"() {
         expect:
         raindrops.convert(number) == expected
