@@ -16,4 +16,9 @@ class Isogram {
         }
         return result
     }
+
+    // Some community starred solutions are based on comparing sizes of
+    // - an array (a list) of letters
+    // - and a set obtained by using .toSet() method on that list/array
+    // or using the '.unique()' method
 }
