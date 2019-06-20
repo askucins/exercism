@@ -1,7 +1,9 @@
 class Anagram {
+    String subject
     private List letters
 
     Anagram(String subject) {
+        this.subject = subject
         letters = letterize(subject)
     }
 
@@ -10,6 +12,10 @@ class Anagram {
     }
 
     def find(candidates) {
-        candidates.grep { String candidate -> letters == letterize(candidate) }
+        candidates.grep { String candidate ->
+            // a word itself is not its own anagram...
+            subject.toLowerCase() != candidate.toLowerCase() &&
+                    letters == letterize(candidate)
+        }
     }
 }
