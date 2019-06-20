@@ -16,4 +16,6 @@ class Raindrops {
         return result == '' ? num.toString() : result
     }
 
+    // TODO Based on community solutions
+    // - collecting results might be actually a bite better - by using 'collect' :)
 }
