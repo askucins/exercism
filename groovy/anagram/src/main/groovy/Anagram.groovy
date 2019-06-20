@@ -1,6 +1,15 @@
 class Anagram {
+    private List letters
+
+    Anagram(String subject) {
+        letters = letterize(subject)
+    }
+
+    static List letterize(String subject) {
+        subject.toLowerCase().toList().sort()
+    }
 
     def find(candidates) {
-        throw new UnsupportedOperationException('method not implemented.')
+        candidates.grep { String candidate -> letters == letterize(candidate) }
     }
 }
