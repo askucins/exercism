@@ -1,6 +1,6 @@
 class TwoFer {
 
     static String twoFer(String name) {
-        throw new UnsupportedOperationException('Method is not implemented')
+        "One for ${name ?: 'you'}, one for me."
     }
 }
