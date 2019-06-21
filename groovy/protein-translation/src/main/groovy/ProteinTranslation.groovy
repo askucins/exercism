@@ -33,19 +33,28 @@ class ProteinTranslation {
             UGA: AminoAcid.STOP
     ]
 
+    static String readCodon(String strand) {
+        def codon = strand.substring(0, 3)
+        assert codon.size() == 3: 'Missing nucleotides!'
+        codon
+    }
+
+    static String advanceStrand(String strand) {
+        strand.substring(3)
+    }
+
     static proteins(String strand) {
         def result = []
         boolean continueTranslation = true
         while (strand && continueTranslation) {
-            def codon = strand.substring(0, 3)
-            assert codon.size() == 3: 'Missing nucleotides!'
-            def translation = translate[(codon)].toString()
+            def codon = readCodon(strand)
+            def translation = translate[(codon)]
             assert translation: 'Not recognized codon!'
-            if (translation == AminoAcid.STOP.toString()) {
+            if (translation == AminoAcid.STOP) {
                 continueTranslation = false
             } else {
-                result.add translation
-                strand = strand.substring(3)
+                result.add translation.toString()
+                strand = advanceStrand(strand)
             }
         }
         result
