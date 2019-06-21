@@ -1,7 +1,6 @@
 class ProteinTranslation {
 
-    static STOP = 'STOP'
-    enum AminoAcid {
+    enum Protein {
         Methionine,
         Phenylalanine,
         Leucine,
@@ -9,29 +8,41 @@ class ProteinTranslation {
         Tyrosine,
         Cysteine,
         Tryptophan,
-        // Control sequence
-        STOP
+        STOP // Control sequence
     }
 
-    static translate = [
-            AUG: AminoAcid.Methionine,
-            UUU: AminoAcid.Phenylalanine,
-            UUC: AminoAcid.Phenylalanine,
-            UUA: AminoAcid.Leucine,
-            UUG: AminoAcid.Leucine,
-            UCU: AminoAcid.Serine,
-            UCC: AminoAcid.Serine,
-            UCA: AminoAcid.Serine,
-            UCG: AminoAcid.Serine,
-            UAU: AminoAcid.Tyrosine,
-            UAC: AminoAcid.Tyrosine,
-            UGU: AminoAcid.Cysteine,
-            UGC: AminoAcid.Cysteine,
-            UGG: AminoAcid.Tryptophan,
-            UAA: AminoAcid.STOP,
-            UAG: AminoAcid.STOP,
-            UGA: AminoAcid.STOP
-    ]
+    static Protein translate(String codon) {
+        def protein
+        switch (codon) {
+            case 'AUG':
+                protein = Protein.Methionine
+                break
+            case ['UUU', 'UUC']:
+                protein = Protein.Phenylalanine
+                break
+            case ['UUA', 'UUG']:
+                protein = Protein.Leucine
+                break
+            case ['UCU', 'UCC', 'UCA', 'UCG']:
+                protein = Protein.Serine
+                break
+            case ['UAU', 'UAC']:
+                protein = Protein.Tyrosine
+                break
+            case ['UGU', 'UGC']:
+                protein = Protein.Cysteine
+                break
+            case 'UGG':
+                protein = Protein.Tryptophan
+                break
+            case ['UAA', 'UAG', 'UGA']:
+                protein = Protein.STOP
+                break
+            default:
+                throw new IllegalArgumentException("No match for codon: $codon")
+        }
+        protein
+    }
 
     static String readCodon(String strand) {
         def codon = strand.substring(0, 3)
@@ -48,12 +59,12 @@ class ProteinTranslation {
         boolean continueTranslation = true
         while (strand && continueTranslation) {
             def codon = readCodon(strand)
-            def translation = translate[(codon)]
-            assert translation: 'Not recognized codon!'
-            if (translation == AminoAcid.STOP) {
+            def protein = translate(codon)
+            assert protein: 'Not recognized codon!'
+            if (protein == Protein.STOP) {
                 continueTranslation = false
             } else {
-                result.add translation.toString()
+                result.add protein.toString()
                 strand = advanceStrand(strand)
             }
         }
