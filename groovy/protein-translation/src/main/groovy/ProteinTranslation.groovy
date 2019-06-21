@@ -52,13 +52,12 @@ class ProteinTranslation {
         strand.substring(3)
     }
 
-    static proteins(String strand) {
+    static proteinsMine(String strand) {
         def result = []
         boolean continueTranslation = true
         while (strand && continueTranslation) {
             def codon = readCodon(strand)
             def protein = translate(codon)
-            assert protein: 'Not recognized codon!'
             if (protein == Protein.STOP) {
                 continueTranslation = false
             } else {
@@ -67,5 +66,19 @@ class ProteinTranslation {
             }
         }
         result
+    }
+
+    static proteinsByCommunity(String strand) {
+        strand
+                .collect() // string to a list of characters
+                .collate(3) // list of characters to a list of 3-elements lists
+                .collect { it.join() } // list of 3-elements lists to list of 3-characters strings (codons)
+                .collect { translate(it) } // codon to protein
+                .takeWhile { it != Protein.STOP } // cut on the first STOP
+                *.toString() // enum to string
+    }
+
+    static proteins(String strand) {
+        proteinsByCommunity(strand)
     }
 }
