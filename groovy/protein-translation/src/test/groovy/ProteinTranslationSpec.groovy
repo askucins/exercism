@@ -127,7 +127,7 @@ class ProteinTranslationSpec extends Specification {
         strand      || expected
         'UGGUAGUGG' || ['Tryptophan']
     }
-    
+
     def "Translation stops if STOP codon in middle of six-codon sequence"() {
         expect:
         ProteinTranslation.proteins(strand) == expected
@@ -135,6 +135,21 @@ class ProteinTranslationSpec extends Specification {
         where:
         strand               || expected
         'UGGUGUUAUUAAUGGUUU' || ['Tryptophan', 'Cysteine', 'Tyrosine']
+    }
+
+    @Unroll
+    def "Translation fails if there is no proper codon present (#strand, #ex)"() {
+        when:
+        ProteinTranslation.proteins(strand)
+
+        then:
+        thrown(ex)
+
+        where:
+        strand   || ex
+        'UGGUG'  || IndexOutOfBoundsException
+        'UGGAAA' || IllegalArgumentException
+
     }
 
 }

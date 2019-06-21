@@ -11,7 +11,7 @@ class ProteinTranslation {
         STOP // Control sequence
     }
 
-    static Protein translate(String codon) {
+    static Protein translate(String codon) throws IllegalArgumentException {
         def protein
         switch (codon) {
             case 'AUG':
@@ -44,13 +44,11 @@ class ProteinTranslation {
         protein
     }
 
-    static String readCodon(String strand) {
-        def codon = strand.substring(0, 3)
-        assert codon.size() == 3: 'Missing nucleotides!'
-        codon
+    static String readCodon(String strand) throws IndexOutOfBoundsException {
+        strand.substring(0, 3)
     }
 
-    static String advanceStrand(String strand) {
+    static String advanceStrand(String strand) throws IndexOutOfBoundsException {
         strand.substring(3)
     }
 
