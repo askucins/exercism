@@ -1,19 +1,21 @@
 class DifferenceOfSquares {
+    Integer num
 
     DifferenceOfSquares(num) {
-        throw new UnsupportedOperationException('Constructor implementation is missing')
+        this.num = num
     }
 
     def squareOfSum() {
-        throw new UnsupportedOperationException('Method implementation is missing')
+        def sum = (1..num).sum(0)
+        sum * sum
     }
 
     def sumOfSquares() {
-        throw new UnsupportedOperationException('Method implementation is missing')
+        (1..num).collect { it * it }.sum(0)
     }
 
     def difference() {
-        throw new UnsupportedOperationException('Method implementation is missing')
+        squareOfSum() - sumOfSquares()
     }
 
 }
