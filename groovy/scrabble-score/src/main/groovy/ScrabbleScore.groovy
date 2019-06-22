@@ -24,7 +24,7 @@ class ScrabbleScore {
     }
 
     static scoreWord(String word) {
-        word.collect { weight(it) }.sum() ?: 0
+        word.collect { weight(it) }.sum(0) // That initial zero handles the case of an empty word
     }
 
 }
