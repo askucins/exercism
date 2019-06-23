@@ -125,4 +125,13 @@ class WordCountSpec extends Specification {
         sentence                     || expected
         ",\n,one,\n ,two \n 'three'" || ['one': 1, 'two': 1, 'three': 1]
     }
+
+    def "Commas inside quoted substrings"() {
+        expect:
+        new WordCount(sentence).wordCount() == expected
+
+        where:
+        sentence                                                      || expected
+        "Joe can't tell between 'large, and fat' and large, and fat." || ['joe': 1, "can't": 1, 'tell': 1, 'between': 1, 'large': 2, 'and': 3, 'fat': 2]
+    }
 }
