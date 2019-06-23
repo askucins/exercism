@@ -11,7 +11,6 @@ class WordCountSpec extends Specification {
         'word'   || ['word': 1]
     }
 
-    @Ignore
     def "Count one of each"() {
         expect:
         new WordCount(sentence).wordCount() == expected
@@ -21,7 +20,6 @@ class WordCountSpec extends Specification {
         'one of each' || ['one': 1, 'of': 1, 'each': 1]
     }
 
-    @Ignore
     def "Multiple occurrences of a word"() {
         expect:
         new WordCount(sentence).wordCount() == expected
@@ -31,7 +29,6 @@ class WordCountSpec extends Specification {
         'one fish two fish red fish blue fish' || ['one': 1, 'fish': 4, 'two': 1, 'red': 1, 'blue': 1]
     }
 
-    @Ignore
     def "Handles cramped lists"() {
         expect:
         new WordCount(sentence).wordCount() == expected
@@ -41,7 +38,6 @@ class WordCountSpec extends Specification {
         'one,two,three' || ['one': 1, 'two': 1, 'three': 1]
     }
 
-    @Ignore
     def "Handles expanded lists"() {
         expect:
         new WordCount(sentence).wordCount() == expected
@@ -51,7 +47,6 @@ class WordCountSpec extends Specification {
         'one,\ntwo,\nthree' || ['one': 1, 'two': 1, 'three': 1]
     }
 
-    @Ignore
     def "Count everything only once"() {
         when:
         def wordCount = new WordCount(sentence)
@@ -68,7 +63,6 @@ class WordCountSpec extends Specification {
         'all the kings horses and all the kings men' || ['all': 2, 'the': 2, 'kings': 2, 'horses': 1, 'and': 1, 'men': 1]
     }
 
-    @Ignore
     def "Ignore punctuation"() {
         expect:
         new WordCount(sentence).wordCount() == expected
@@ -78,7 +72,6 @@ class WordCountSpec extends Specification {
         'car : carpet as java : javascript!!&@$%^&' || ['car': 1, 'carpet': 1, 'as': 1, 'java': 1, 'javascript': 1]
     }
 
-    @Ignore
     def "Include numbers"() {
         expect:
         new WordCount(sentence).wordCount() == expected
@@ -88,7 +81,6 @@ class WordCountSpec extends Specification {
         'testing, 1, 2 testing' || ['testing': 2, '1': 1, '2': 1]
     }
 
-    @Ignore
     def "Normalize case"() {
         expect:
         new WordCount(sentence).wordCount() == expected
@@ -98,7 +90,6 @@ class WordCountSpec extends Specification {
         'go Go GO Stop stop' || ['go': 3, 'stop': 2]
     }
 
-    @Ignore
     def "With apostrophes"() {
         expect:
         new WordCount(sentence).wordCount() == expected
@@ -108,7 +99,6 @@ class WordCountSpec extends Specification {
         "First: don't laugh. Then: don't cry." || ['first': 1, "don't": 2, 'laugh': 1, 'then': 1, 'cry': 1]
     }
 
-    @Ignore
     def "With quotations"() {
         expect:
         new WordCount(sentence).wordCount() == expected
@@ -118,7 +108,6 @@ class WordCountSpec extends Specification {
         "Joe can't tell between 'large' and large." || ['joe': 1, "can't": 1, 'tell': 1, 'between': 1, 'large': 2, 'and': 1]
     }
 
-    @Ignore
     def "Multiple spaces not detected as a word"() {
         expect:
         new WordCount(sentence).wordCount() == expected
@@ -128,7 +117,6 @@ class WordCountSpec extends Specification {
         ' multiple   whitespaces' || ['multiple': 1, 'whitespaces': 1]
     }
 
-    @Ignore
     def "Alternating word separators not detected as a word"() {
         expect:
         new WordCount(sentence).wordCount() == expected
