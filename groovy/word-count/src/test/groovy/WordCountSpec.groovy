@@ -72,6 +72,16 @@ class WordCountSpec extends Specification {
         'car : carpet as java : javascript!!&@$%^&' || ['car': 1, 'carpet': 1, 'as': 1, 'java': 1, 'javascript': 1]
     }
 
+    def "Ignore punctuation inside"() {
+        //This is a questionable test - should it produce 'javascript' or 'java' and 'script'?
+        expect:
+        new WordCount(sentence).wordCount() == expected
+
+        where:
+        sentence                                    || expected
+        'car : carpet as java : java!!&@$%^&script' || ['car': 1, 'carpet': 1, 'as': 1, 'java': 1, 'javascript': 1]
+    }
+
     def "Include numbers"() {
         expect:
         new WordCount(sentence).wordCount() == expected
@@ -131,7 +141,7 @@ class WordCountSpec extends Specification {
         new WordCount(sentence).wordCount() == expected
 
         where:
-        sentence                                                      || expected
-        "Joe can't tell between 'large, and fat' and large, and fat." || ['joe': 1, "can't": 1, 'tell': 1, 'between': 1, 'large': 2, 'and': 3, 'fat': 2]
+        sentence                                                                     || expected
+        "Joe can't tell 'Joe : ' between 'large, and don't fat' and large, and fat." || ['joe': 2, "can't": 1, 'tell': 1, 'between': 1, 'large': 2, 'and': 3, 'fat': 2, "don't": 1]
     }
 }

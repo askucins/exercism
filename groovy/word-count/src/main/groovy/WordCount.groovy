@@ -1,21 +1,40 @@
 class WordCount {
-    String sentence
     private Map<String, Integer> graph = [:]
 
     WordCount(String s) {
-        sentence = s.replaceAll(/\n+/, ' ') // Unwrap to one line with spaces as separators
-        List<String> tokens = sentence.split(/\s+|,/) // split into pre-words
-        List<String> words = tokens
-                .collect { it.replaceAll(/^'|'$/, '') } // leading and trailing quotes are trimmed
-                .collect { it.replaceAll(/[^a-zA-Z0-9']/, '').toLowerCase() } // normalize
-                .collect { it.trim() } //  leading and trailing spaces are removed
-                .grep { it } // finally all empty elements are removed
-        words.each { String word ->
-            graph.containsKey(word) ? graph[(word)]++ : graph.put(word, 1)
-        }
+        List<String> words = wordsMine(s)
+        //List<String> words = wordsCommunity1(s)
+        //List<String> words = wordsCommunity2(s)
+        graph = words.countBy { it } // Nice! (Based on community solutions)
     }
 
     def wordCount() {
         graph
     }
+
+    static List<String> wordsMine(String sentence) {
+        sentence
+                .split(/[\s+,\n]+/) // split into pre-words
+                .collect {
+                    it
+                            .replaceAll(/^'|'$/, '') // leading and trailing quotes are trimmed
+                            .replaceAll(/[^a-zA-Z0-9']/, '') //removing trash
+                            .toLowerCase() // normalize
+                            .trim()  //  leading and trailing spaces are removed
+                }.grep() // empty values are removed
+    }
+
+    static List<String> wordsCommunity1(String sentence) {
+        sentence
+                .toLowerCase()
+                .findAll(/[a-z0-9]+('[a-z]+)?/)
+    }
+
+    static List<String> wordsCommunity2(String sentence) {
+        sentence
+                .toLowerCase()
+                .replaceAll(/([^A-Za-z0-9']|\B'|'\B)/, ' ')
+                .findAll(/[\w']+/)
+    }
+
 }
