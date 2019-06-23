@@ -63,4 +63,25 @@ class PerfectNumbersSpec extends Specification {
         then:
         thrown(ArithmeticException)
     }
+
+    @Unroll
+    def "Should work in case of (#number) too"() {
+        expect:
+        PerfectNumbers.classify(number) == expected
+
+        where:
+        number || expected
+        1      || Classification.DEFICIENT
+        2      || Classification.DEFICIENT
+        3      || Classification.DEFICIENT
+        4      || Classification.DEFICIENT
+        5      || Classification.DEFICIENT
+        6      || Classification.PERFECT
+        7      || Classification.DEFICIENT
+        8      || Classification.DEFICIENT
+        9      || Classification.DEFICIENT
+        10     || Classification.DEFICIENT
+        11     || Classification.DEFICIENT
+        12     || Classification.ABUNDANT
+    }
 }

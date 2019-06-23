@@ -18,14 +18,14 @@ class PerfectNumbers {
         }
     }
 
+    // The aliquot sum is defined as the sum of the factors of a number not including the number itself.
     static Integer aliquotSum(Integer num) {
-        List<Integer> factors = factorize(num)
-        println "Factors of $num: $factors"
-        factors.sum(0)
+        if (num == 1) {
+            return 0 // special case
+        } else {
+            List<Integer> factors = (1..Math.floor(num / 2).toInteger()).grep { num % it == 0 }
+            println "Factors of $num: $factors"
+            return factors.sum(0).toInteger()
+        }
     }
-
-    static List<Integer> factorize(Integer num) {
-        (1..<num).grep { num % it == 0 }.toList()
-    }
-
 }
