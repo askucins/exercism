@@ -1,5 +1,5 @@
 class RobotName {
-
+    private static Random random = new Random()
     String name
 
     RobotName() {
@@ -14,7 +14,7 @@ class RobotName {
         def letters = ('A'..'Z')
         def numbers = (0..9)
         def getRandomFrom = { List family ->
-            Integer index = Math.floor(Math.random() * family.size()).toInteger()
+            Integer index = random.nextInt(family.size())
             family[(index)]
         }
         String result = ''
