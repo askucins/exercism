@@ -12,11 +12,9 @@ class SecretHandshake {
     static List<String> commands(int number) {
         number = number & mask // We care only about 'handshake-like' numbers
 
-        List<String> result = handshakes.grep { (number & it[0]) }.collect { it[1].toString() }
-        if (number & reverse) {
-            return result.reverse()
-        } else {
-            return result
-        }
+        List<String> handshake = handshakes.grep { (number & it[0]) }.collect { it[1].toString() }
+
+        (number & reverse) ? handshake.reverse() : handshake
+
     }
 }
