@@ -1,13 +1,31 @@
+import groovy.util.logging.Slf4j
+
+@Slf4j
 class RobotName {
+    private static Set names = []
     private static Random random = new Random()
     String name
 
     RobotName() {
-        name = randomName()
+        provisionName()
     }
 
     def reset() {
-        name = randomName()
+        provisionName()
+    }
+
+    def provisionName() {
+        String newName = randomName()
+        log.debug "Old name: $name, new name: $newName; Number of used names: ${names.size()}"
+        if (names.contains(newName)) {
+            throw new IllegalArgumentException("Name: $newName is already used!")
+        } else {
+            if (name) {
+                names.remove(name)
+            }
+            names.add(newName)
+            name = newName
+        }
     }
 
     static String randomName() {
