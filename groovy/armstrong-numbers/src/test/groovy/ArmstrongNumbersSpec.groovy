@@ -4,7 +4,7 @@ class ArmstrongNumbersSpec extends Specification {
 
     def "Zero is an Armstrong number"() {
         expect:
-        ArmstrongNumber.isArmstrongNumber(number) == expected
+        ArmstrongNumbers.isArmstrongNumber(number) == expected
 
         where:
         number || expected
@@ -14,7 +14,7 @@ class ArmstrongNumbersSpec extends Specification {
     @Ignore
     def "Single digit numbers are Armstrong numbers"() {
         expect:
-        ArmstrongNumber.isArmstrongNumber(number) == expected
+        ArmstrongNumbers.isArmstrongNumber(number) == expected
 
         where:
         number || expected
@@ -24,7 +24,7 @@ class ArmstrongNumbersSpec extends Specification {
     @Ignore
     def "There are no 2 digit Armstrong numbers"() {
         expect:
-        ArmstrongNumber.isArmstrongNumber(number) == expected
+        ArmstrongNumbers.isArmstrongNumber(number) == expected
 
         where:
         number || expected
@@ -34,7 +34,7 @@ class ArmstrongNumbersSpec extends Specification {
     @Ignore
     def "Three digit number that is an Armstrong number"() {
         expect:
-        ArmstrongNumber.isArmstrongNumber(number) == expected
+        ArmstrongNumbers.isArmstrongNumber(number) == expected
 
         where:
         number || expected
@@ -44,7 +44,7 @@ class ArmstrongNumbersSpec extends Specification {
     @Ignore
     def "Three digit number that is not an Armstrong number"() {
         expect:
-        ArmstrongNumber.isArmstrongNumber(number) == expected
+        ArmstrongNumbers.isArmstrongNumber(number) == expected
 
         where:
         number || expected
@@ -54,7 +54,7 @@ class ArmstrongNumbersSpec extends Specification {
     @Ignore
     def "Four digit number that is an Armstrong number"() {
         expect:
-        ArmstrongNumber.isArmstrongNumber(number) == expected
+        ArmstrongNumbers.isArmstrongNumber(number) == expected
 
         where:
         number || expected
@@ -64,7 +64,7 @@ class ArmstrongNumbersSpec extends Specification {
     @Ignore
     def "Four digit number that is not an Armstrong number"() {
         expect:
-        ArmstrongNumber.isArmstrongNumber(number) == expected
+        ArmstrongNumbers.isArmstrongNumber(number) == expected
 
         where:
         number || expected
@@ -74,7 +74,7 @@ class ArmstrongNumbersSpec extends Specification {
     @Ignore
     def "Seven digit number that is an Armstrong number"() {
         expect:
-        ArmstrongNumber.isArmstrongNumber(number) == expected
+        ArmstrongNumbers.isArmstrongNumber(number) == expected
 
         where:
         number  || expected
@@ -84,7 +84,7 @@ class ArmstrongNumbersSpec extends Specification {
     @Ignore
     def "Seven digit number that is not an Armstrong number"() {
         expect:
-        ArmstrongNumber.isArmstrongNumber(number) == expected
+        ArmstrongNumbers.isArmstrongNumber(number) == expected
 
         where:
         number  || expected
