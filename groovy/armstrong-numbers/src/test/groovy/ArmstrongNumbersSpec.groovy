@@ -82,4 +82,11 @@ class ArmstrongNumbersSpec extends Specification {
         number  || expected
         9926314 || false
     }
+
+    def "Non integer should thrown an error when Armstronged"() {
+        when:
+        ArmstrongNumbers.isArmstrongNumber(1.2)
+        then:
+        thrown(MissingMethodException)
+    }
 }
