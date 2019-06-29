@@ -2,8 +2,8 @@ import groovy.util.logging.Slf4j
 
 @Slf4j
 class RobotName {
-    private static Set names = []
     private static Random random = new Random()
+    static Set names = []
     String name
 
     RobotName() {

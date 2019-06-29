@@ -47,6 +47,7 @@ class RobotNameSpec extends Specification {
     // According to
     // https://math.stackexchange.com/questions/1610327/expected-number-of-draws-with-replacement-until-a-repeat-draw
     // the expected length of series of unique names is around 1030
+    // 100 should be then almost perfectly safe...
     def "Can be given multiple times"() {
         given:
         def robots = []
@@ -54,4 +55,12 @@ class RobotNameSpec extends Specification {
         100.times { assert robots.add(new RobotName()) }
     }
 
+    def "Should create new robot-name increase used-names collection"() {
+        given:
+        def namesUsed = RobotName.names.size()
+        when:
+        def robot = new RobotName()
+        then:
+        RobotName.names.size() == namesUsed + 1
+    }
 }
