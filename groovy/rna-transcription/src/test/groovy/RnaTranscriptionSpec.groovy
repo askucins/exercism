@@ -14,7 +14,6 @@ class RnaTranscriptionSpec extends Specification {
         'C' || 'G'
     }
 
-    @Ignore
     def "The RNA complement of guanine is cytosine"() {
         expect:
         complement.ofDNA(dna) == expected
@@ -24,7 +23,6 @@ class RnaTranscriptionSpec extends Specification {
         'G' || 'C'
     }
 
-    @Ignore
     def "The RNA complement of thymine is adenine"() {
         expect:
         complement.ofDNA(dna) == expected
@@ -34,7 +32,6 @@ class RnaTranscriptionSpec extends Specification {
         'T' || 'A'
     }
 
-    @Ignore
     def "The RNA complement of adenine is uracil"() {
         expect:
         complement.ofDNA(dna) == expected
@@ -44,7 +41,6 @@ class RnaTranscriptionSpec extends Specification {
         'A' || 'U'
     }
 
-    @Ignore
     def "Can calculate long strand complement"() {
         expect:
         complement.ofDNA(dna) == expected
@@ -54,7 +50,6 @@ class RnaTranscriptionSpec extends Specification {
         'ACGTGGTCTTAA' || 'UGCACCAGAAUU'
     }
 
-    @Ignore
     def "Correctly handles invalid input"() {
         when:
         complement.ofDNA('U')
@@ -63,7 +58,6 @@ class RnaTranscriptionSpec extends Specification {
         thrown(IllegalArgumentException)
     }
 
-    @Ignore
     def "Correctly handles completely invalid input"() {
         when:
         complement.ofDNA('XXX')
@@ -72,7 +66,6 @@ class RnaTranscriptionSpec extends Specification {
         thrown(IllegalArgumentException)
     }
 
-    @Ignore
     def "Correctly handles partially invalid input"() {
         when:
         complement.ofDNA('ACGTXXXCTTAA')
