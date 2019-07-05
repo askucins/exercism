@@ -1,7 +1,7 @@
 class Pangram {
 
     static boolean isPangram(String sentence) {
-        throw new UnsupportedOperationException('Method implementation is missing')
+        def sentenceSummary = sentence.toLowerCase().replaceAll(/[^a-z]/, '').collect().sort().unique()
+        ('a'..'z') == sentenceSummary
     }
-
 }
