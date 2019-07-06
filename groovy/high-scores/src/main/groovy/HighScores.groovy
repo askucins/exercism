@@ -10,7 +10,9 @@ class HighScores {
     Integer personalBest() { scores.max() }
 
     List<Integer> personalTopThree() {
-        scores.sort { a, b -> b <=> a }.subList(0, Math.min(3, scores.size()))
+        //scores.sort { a, b -> b <=> a }.subList(0, Math.min(3, scores.size()))
+        // Based on community solutions
+        scores.sort().reverse().take(3)
     }
 
 }
