@@ -7,7 +7,7 @@ class Proverb {
     static String runningSentence(String first, String second) {
         "For want of a $first the $second was lost.\n"
     }
-    
+
     static String recite(List<String> strings) {
         String result = ''
         switch (strings.size()) {
