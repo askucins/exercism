@@ -9,6 +9,22 @@ class Proverb {
     }
 
     static String recite(List<String> strings) {
+        //reciteMine(strings)
+        reciteByCollate(strings)
+    }
+
+    // Based on community solution - that collate is awesome!
+    static String reciteByCollate(List<String> strings) {
+        strings.size()
+                ?
+                strings
+                        .collate(2, 1, false)
+                        .collect { runningSentence(it[0], it[1]) }
+                        .join() + lastSentence(strings.first())
+                : ''
+    }
+
+    static String reciteMine(List<String> strings) {
         String result = ''
         switch (strings.size()) {
             case 0:
