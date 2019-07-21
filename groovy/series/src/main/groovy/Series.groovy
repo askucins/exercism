@@ -8,6 +8,9 @@ class Series {
         if (upperLimit < 0) {
             throw new ArithmeticException()
         }
-        (0..upperLimit).collect { series.substring(it, it + sliceLength) }
+        // Original
+        //(0..upperLimit).collect { series.substring(it, it + sliceLength) }
+        // Based on community solutions:
+        series.toList().collate(sliceLength, 1, false)*.join('')
     }
 }
