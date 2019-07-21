@@ -34,7 +34,8 @@ class PhoneNumberSpec extends Specification {
 
         where:
         phrase      || expected
-        '123456789' || '0000000000'
+        '123456789' || '0000000000' // too weak? (fails also on areaCode starting from 1
+        '211344555' || '0000000000'
     }
 
     def "invalid when 11 digits does not start with a 1"() {

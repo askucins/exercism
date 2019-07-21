@@ -35,6 +35,9 @@ class PhoneNumber {
     static String cleanUpNumber(String input) {
         def defaultNumber = '0000000000'
         String number = input.replaceAll(/[^0-9]/, '')
+        if (number.size() < 10) {
+            return defaultNumber
+        }
         if (number.size() > 11) {
             return defaultNumber
         }
