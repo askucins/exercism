@@ -35,11 +35,12 @@ class RomanNumerals {
 
     RomanNumerals() {
         Integer.metaClass.getRoman = { ->
-            if (value < 1 || value > 3000) {
-                throw new IllegalArgumentException("$value is no romanizable!")
+            Integer arabic = delegate as Integer
+            if (arabic < 1 || arabic > 3000) {
+                throw new IllegalArgumentException("$arabic is no romanizable!")
             }
 
-            "$value"
+            "$arabic"
                     .toList()
                     .reverse()
                     *.toInteger()
