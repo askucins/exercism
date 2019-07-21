@@ -29,7 +29,22 @@ class RomanNumeralsSpec extends Specification {
         575    || 'DLXXV'
         911    || 'CMXI'
         1024   || 'MXXIV'
+        2874   || 'MMDCCCLXXIV'
         3000   || 'MMM'
+    }
+
+    @Unroll
+    def "Cannot convert number outside the scope (#arabic)"() {
+        when:
+        arabic.roman
+
+        then:
+        thrown(IllegalArgumentException)
+
+        where:
+        arabic | _
+        0      | _
+        3001   | _
     }
 
 }
