@@ -9,7 +9,7 @@ class RomanNumerals {
             'M', // 1000
     ].withDefault { '' }
 
-    static String processChunk(Integer digit, List<String> romans) {
+    static String processDigit(Integer digit, List<String> romans) {
         String result
         switch (digit) {
             case [1, 2, 3]:
@@ -39,11 +39,17 @@ class RomanNumerals {
                 throw new IllegalArgumentException("$value is no romanizable!")
             }
 
-            def digits = "$value".toList().reverse()*.toInteger().withDefault { 0 }
-            (0..3)
-                    .collect { processChunk(digits[it], romanCharacters[(it * 2)..(it * 2 + 2)]) }
+            "$value"
+                    .toList()
+                    .reverse()
+                    *.toInteger()
+                    .withIndex()
+                    .collect { Integer digit, int idx ->
+                        processDigit(digit, romanCharacters[(idx * 2)..(idx * 2 + 2)])
+                    }
                     .reverse()
                     .join()
+
         }
     }
 }
