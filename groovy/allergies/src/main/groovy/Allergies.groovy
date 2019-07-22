@@ -15,15 +15,18 @@ class Allergies {
             this.code = code
         }
     }
-    private Integer score
 
-    Allergies(int score) { this.score = score }
+    final private List<String> allergens
+
+    Allergies(int score) {
+        allergens = allergy.values().grep { it.code & score }*.name()
+    }
 
     Boolean allergicTo(String substance) {
-        allergy.valueOf(substance).code & score
+        allergens.contains(substance)
     }
 
     List<String> list() {
-        allergy.values().grep { it.code & score }*.name()
+        allergens
     }
 }
