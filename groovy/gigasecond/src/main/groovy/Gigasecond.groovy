@@ -1,6 +1,7 @@
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.time.temporal.ChronoUnit
 
 class Gigasecond {
 
@@ -11,6 +12,10 @@ class Gigasecond {
     }
 
     static LocalDateTime add(LocalDateTime moment) {
-        LocalDateTime.ofEpochSecond(moment.toEpochSecond(ZoneOffset.UTC) + gigasec, 0, ZoneOffset.UTC)
+        // Original
+        //LocalDateTime.ofEpochSecond(moment.toEpochSecond(ZoneOffset.UTC) + gigasec, 0, ZoneOffset.UTC)
+
+        // Based on community solutions
+        moment.plus(gigasec, ChronoUnit.SECONDS)
     }
 }
