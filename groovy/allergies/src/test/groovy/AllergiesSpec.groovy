@@ -25,7 +25,6 @@ class AllergiesSpec extends Specification {
         'strawberries' || false
     }
 
-    @Ignore
     def "Is allergic to eggs"() {
         given:
         int score = 5
@@ -39,7 +38,6 @@ class AllergiesSpec extends Specification {
         'eggs'    || true
     }
 
-    @Ignore
     def "Allergic to strawberries but not peanuts"() {
         given:
         int score = 9
@@ -57,8 +55,6 @@ class AllergiesSpec extends Specification {
     }
 
     // Given a number, list all things Tom is allergic to
-
-    @Ignore
     def "No allergies at all"() {
         given:
         int score = 0
@@ -68,7 +64,6 @@ class AllergiesSpec extends Specification {
         allergies.list() == []
     }
 
-    @Ignore
     def "Allergic to just eggs"() {
         given:
         int score = 1
@@ -78,7 +73,6 @@ class AllergiesSpec extends Specification {
         allergies.list() == ['eggs']
     }
 
-    @Ignore
     def "Allergic to just peanuts"() {
         given:
         int score = 2
@@ -88,7 +82,6 @@ class AllergiesSpec extends Specification {
         allergies.list() == ['peanuts']
     }
 
-    @Ignore
     def "Allergic to just strawberries"() {
         given:
         int score = 8
@@ -98,7 +91,6 @@ class AllergiesSpec extends Specification {
         allergies.list() == ['strawberries']
     }
 
-    @Ignore
     def "Allergic to eggs and peanuts"() {
         given:
         int score = 3
@@ -108,7 +100,6 @@ class AllergiesSpec extends Specification {
         allergies.list() == ['eggs', 'peanuts']
     }
 
-    @Ignore
     def "Allergic to lots of stuff"() {
         given:
         int score = 248
@@ -122,7 +113,6 @@ class AllergiesSpec extends Specification {
                              'cats']
     }
 
-    @Ignore
     def "Allergic to everything"() {
         given:
         int score = 255
@@ -139,7 +129,6 @@ class AllergiesSpec extends Specification {
                              'cats']
     }
 
-    @Ignore
     def "Ignore non allergen score parts"() {
         given:
         int score = 509
