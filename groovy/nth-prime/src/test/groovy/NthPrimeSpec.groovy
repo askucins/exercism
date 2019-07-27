@@ -74,6 +74,15 @@ class NthPrimeSpec extends Specification {
         10001  || 104743
     }
 
+    def "Can calculate even bigger prime"() {
+        expect:
+        NthPrime.nth(number) == expected
+
+        where:
+        number || expected
+        10005  || 104779
+    }
+
     def "Throws exception when asked for the zeroth prime"() {
         when:
         NthPrime.nth(0)
