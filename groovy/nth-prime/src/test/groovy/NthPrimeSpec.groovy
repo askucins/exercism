@@ -11,6 +11,15 @@ class NthPrimeSpec extends Specification {
         println NthPrime.status('A')
     }
 
+    def "Can calculate a big prime first"() {
+        expect:
+        NthPrime.nth(number) == expected
+
+        where:
+        number || expected
+        10001  || 104743
+    }
+
     def "Can calculate the first prime"() {
         expect:
         NthPrime.nth(number) == expected
