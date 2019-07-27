@@ -5,15 +5,15 @@ class Matrix {
     Matrix(String asString) {
         rows = asString
                 .split(/\n/)
-                .collect { it.split(/\s+/)*.toInteger() }
+                .collect { it.split(/\s+/).collect { it as int } }
         columns = rows.transpose()
     }
 
     int[] row(int rowNumber) {
-        rows[(rowNumber)] as int[]
+        rows[(rowNumber)]
     }
 
-    int[] column(columnNumber) {
+    int[] column(int columnNumber) {
         columns[(columnNumber)]
     }
 }
