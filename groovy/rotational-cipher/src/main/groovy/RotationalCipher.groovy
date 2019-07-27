@@ -1,5 +1,6 @@
 class RotationalCipher {
     private static List<String> alphabet = ('a'..'z')
+    private static Integer alphabetSize = alphabet.size()
     private int key
 
     RotationalCipher(int key) {
@@ -11,8 +12,7 @@ class RotationalCipher {
             def result = it
             def idx = alphabet.indexOf(it.toLowerCase())
             if (idx >= 0) {
-                def position = (idx + key) % alphabet.size()
-                String rotated = alphabet[(position)]
+                String rotated = alphabet[(idx + key) % alphabetSize]
                 result = it.toCharacter().lowerCase ? rotated : rotated.toUpperCase()
             }
             result
