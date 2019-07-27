@@ -1,14 +1,19 @@
 class Matrix {
+    def rows
+    def columns
 
     Matrix(String asString) {
-        throw new UnsupportedOperationException('Method implementation is missing')
+        rows = asString
+                .split(/\n/)
+                .collect { it.split(/\s+/)*.toInteger() }
+        columns = rows.transpose()
     }
 
     int[] row(int rowNumber) {
-        throw new UnsupportedOperationException('Method implementation is missing')
+        rows[(rowNumber)] as int[]
     }
 
     int[] column(columnNumber) {
-        throw new UnsupportedOperationException('Method implementation is missing')
+        columns[(columnNumber)]
     }
 }
