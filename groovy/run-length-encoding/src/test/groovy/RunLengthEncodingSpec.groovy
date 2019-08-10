@@ -1,11 +1,22 @@
+import groovy.util.logging.Slf4j
 import spock.lang.*
 
 class RunLengthEncodingSpec extends Specification {
 
+    RunLengthEncoding encoder() { null }
+
+    @Shared
+    RunLengthEncoding runLengthEncoder
+
+    def setupSpec() {
+        runLengthEncoder = encoder() ?: new RunLengthEncodingMine()
+        println "Encoder: ${runLengthEncoder.class.toString()}"
+    }
+
     @Unroll
     def "Run-length encode #string"() {
         expect:
-        new RunLengthEncoding().encode(string) == expected
+        runLengthEncoder.encode(string) == expected
 
         where:
         string                                                  || expected
@@ -25,7 +36,7 @@ class RunLengthEncodingSpec extends Specification {
     @Unroll
     def "Run-length decode #string"() {
         expect:
-        new RunLengthEncoding().decode(string) == expected
+        runLengthEncoder.decode(string) == expected
 
         where:
         string          || expected
@@ -40,7 +51,7 @@ class RunLengthEncodingSpec extends Specification {
     @Unroll
     def "Encode followed by decode gives original string (#string)"() {
         setup:
-        RunLengthEncoding run = new RunLengthEncoding()
+        RunLengthEncoding run = runLengthEncoder
 
         expect:
         run.decode(run.encode(string)) == expected
