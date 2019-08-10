@@ -15,9 +15,13 @@ class RunLengthEncodingSpec extends Specification {
         'WWWWWWWWWWWWBWWWWWWWWWWWWBBBWWWWWWWWWWWWWWWWWWWWWWWWB' || '12WB12W3B24WB'
         '  hsqq qww  '                                          || '2 hs2q q2w2 '
         'aabbbcccc'                                             || '2a3b4c'
+        'aaAAA'                                                 || '2a3A'
+        'aaa'                                                   || '3a'
+        'a'                                                     || 'a'
+        'a A'                                                   || 'a A'
+        'a  A'                                                  || 'a2 A'
     }
 
-    @Ignore
     @Unroll
     def "Run-length decode #string"() {
         expect:
@@ -33,8 +37,8 @@ class RunLengthEncodingSpec extends Specification {
         '2a3b4c'        || 'aabbbcccc'
     }
 
-    @Ignore
-    def "Encode followed by decode gives original string"() {
+    @Unroll
+    def "Encode followed by decode gives original string (#string)"() {
         setup:
         RunLengthEncoding run = new RunLengthEncoding()
 
@@ -44,6 +48,9 @@ class RunLengthEncodingSpec extends Specification {
         where:
         string       || expected
         'zzz ZZ  zZ' || 'zzz ZZ  zZ'
+        ''           || ''
+        ' '          || ' '
+        'a  A'       || 'a  A'
+        'aaAAaa'     || 'aaAAaa'
     }
-
 }
