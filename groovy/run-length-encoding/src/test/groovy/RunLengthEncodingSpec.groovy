@@ -1,4 +1,3 @@
-import groovy.util.logging.Slf4j
 import spock.lang.*
 
 class RunLengthEncodingSpec extends Specification {

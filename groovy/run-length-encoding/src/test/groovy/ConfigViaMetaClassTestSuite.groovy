@@ -4,12 +4,12 @@ import org.junit.runners.Suite
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses([RunLengthEncodingSpec.class])
-class RunLengthEncodingTestSuite {
+class ConfigViaMetaClassTestSuite {
     @BeforeClass
     static void "configure test"() {
         RunLengthEncodingSpec.metaClass.encoder = { ->
-            //new RunLengthEncodingMine()
-            new RunLengthEncodingByAmscotti()
+            new RunLengthEncodingMine()
+            //new RunLengthEncodingByAmscotti()
         }
     }
 }
