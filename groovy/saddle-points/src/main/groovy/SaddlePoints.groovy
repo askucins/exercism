@@ -1,15 +1,19 @@
 class SaddlePoints {
 
+    // There is a subtlety here. Without that *.toInteger it apparently somehow returns List<Long>???
+    // Anyway either one needs to use
+    // input.findIndexValues { val -> val >= maxValue }*.toInteger()
+    // or make sure both peaks and valleys contain only Integer.
+    // Without intersection was *always* empty
+
     static List<Integer> findAllPeaks(List<Integer> input) {
         Integer maxValue = input.max()
-        //input.withIndex().grep { value, idx -> value >= maxValue }.collect { val, idx -> idx }
-        input.findIndexValues { val -> val >= maxValue }*.toInteger() // Number vs Integer trap
+        input.findIndexValues { val -> val >= maxValue }*.toInteger()
     }
 
     static List<Integer> findAllValleys(List<Integer> input) {
         Integer minValue = input.min()
-        //input.withIndex().grep { value, idx -> value <= minValue }.collect { val, idx -> idx }
-        input.findIndexValues { val -> val <= minValue }*.toInteger() // Number vs Integer trap
+        input.findIndexValues { val -> val <= minValue }*.toInteger()
     }
 
 
@@ -20,11 +24,7 @@ class SaddlePoints {
 
         def peaks = matrix.withIndex().sum([]) { hor, idx -> findAllPeaks(hor).collect { [idx, it] } }
         def valleys = matrix.transpose().withIndex().sum([]) { ver, idx -> findAllValleys(ver).collect { [it, idx] } }
-        println "P: $peaks"
-        println "V: $valleys"
 
-        // This seems to be tricky if one falls in that Number vs Integer trap!
-        // It doesn't work for List<Number> somehow or so... weird...
         peaks.intersect(valleys)
     }
 }
