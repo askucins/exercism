@@ -25,10 +25,9 @@ class AllYourBase {
 
     List<Integer> polyBuild(Integer base, Integer value, List<Integer> accu) {
         if (value == 0) {
-            accu
+            accu ? accu : [0] // either the last or the first possible zero value
         } else {
-            accu << value % base
-            polyBuild(base, value.intdiv(base), accu)
+            polyBuild(base, value.intdiv(base), accu << value % base)
         }
     }
 
@@ -36,10 +35,6 @@ class AllYourBase {
         if (outputBase <= 1) {
             throw new ArithmeticException()
         }
-        if (this.value == 0) {
-            [0]
-        } else {
-            polyBuild(outputBase, this.value, []).reverse()
-        }
+        polyBuild(outputBase, this.value, []).reverse()
     }
 }
