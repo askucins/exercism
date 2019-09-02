@@ -8,7 +8,7 @@ class FlattenArray {
             List tail = array?.tail()
             if (head == null) {
                 flattener(tail, accu)
-            } else if (head.toString().isInteger()) {
+            } else if (head instanceof Integer) {
                 flattener(tail, accu << head.toInteger())
             } else {
                 accu.addAll(flattener(head as List, []))
@@ -20,5 +20,24 @@ class FlattenArray {
     static List<Integer> flatten(List array) {
         //array.flatten().grep { it != null }*.toInteger()
         flattener(array, [])
+        //flattenCommunity(array)
+    }
+
+    // Based on https://exercism.io/tracks/groovy/exercises/flatten-array/solutions/10109264748e4b44bf2bfc6a761cf636
+    static flattenCommunity(input) {
+        input.inject([]) { result, elem ->
+            println "[B] result: $result, Elem: $elem"
+            if (elem != null) {
+                if (elem instanceof List) {
+                    //flattenCommunity(elem).each { result << it }
+                    result.addAll(flattenCommunity(elem))
+                } else {
+                    result << elem
+                }
+            }
+            println "[A] result: $result, Elem: $elem"
+            result
+        }
     }
 }
+
