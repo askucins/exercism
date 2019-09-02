@@ -143,7 +143,7 @@ class AllYourBaseSpec extends Specification {
 
         where:
         inputBase | digits | outputBase
-        1         | [0]    | 10
+        0         | [0]    | 10
     }
 
     def "Input base is zero"() {
