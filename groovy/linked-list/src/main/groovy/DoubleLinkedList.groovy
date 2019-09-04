@@ -1,7 +1,3 @@
-import groovy.transform.Canonical
-
-
-@Canonical
 class DoubleLinkedList<T> {
     Node<T> first = null
     Node<T> last = null
@@ -24,7 +20,7 @@ class DoubleLinkedList<T> {
         first = head
 
         if (!last) {
-            last = head
+            last = first
         }
     }
 
@@ -66,7 +62,7 @@ class DoubleLinkedList<T> {
         last = tail
 
         if (!first) {
-            first = tail
+            first = last
         }
     }
 }
