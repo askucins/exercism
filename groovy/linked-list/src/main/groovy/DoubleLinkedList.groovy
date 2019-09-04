@@ -1,19 +1,56 @@
+import groovy.transform.Canonical
+
+@Canonical
+class Node<T> {
+    T value
+    Node<T> prev = null
+    Node<T> next = null
+}
+
+@Canonical
 class DoubleLinkedList<T> {
+    Node<T> first = null
+    Node<T> last = null
 
-    void push(T value) {
-        throw new UnsupportedOperationException('Method implementation is missing')
-    }
+    void unshift(T value) {
+        Node<T> head = new Node<T>(value: value, next: first)
+        if (first) {
+            first.prev = head
+        }
+        first = head
 
-    T pop() {
-        throw new UnsupportedOperationException('Method implementation is missing')
+        if (!last) {
+            last = head
+        }
     }
 
     T shift() {
-        throw new UnsupportedOperationException('Method implementation is missing')
+        T value = first.value
+        first = first.next
+        if (first) {
+            first.prev = null
+        }
+        value
     }
 
-    void unshift(T value) {
-        throw new UnsupportedOperationException('Method implementation is missing')
+    T pop() {
+        T value = last.value
+        last = last.prev
+        if (last) {
+            last.next = null
+        }
+        value
     }
 
+    void push(T value) {
+        Node<T> tail = new Node<T>(value: value, prev: last)
+        if (last) {
+            last.next = tail
+        }
+        last = tail
+
+        if (!first) {
+            first = tail
+        }
+    }
 }
