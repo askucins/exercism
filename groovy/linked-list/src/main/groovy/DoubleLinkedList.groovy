@@ -1,16 +1,20 @@
 import groovy.transform.Canonical
 
-@Canonical
-class Node<T> {
-    T value
-    Node<T> prev = null
-    Node<T> next = null
-}
 
 @Canonical
 class DoubleLinkedList<T> {
     Node<T> first = null
     Node<T> last = null
+
+    Boolean isEmpty() {
+        first == null && last == null
+    }
+
+    class Node<T> {
+        T value
+        Node<T> prev = null
+        Node<T> next = null
+    }
 
     void unshift(T value) {
         Node<T> head = new Node<T>(value: value, next: first)
@@ -25,21 +29,33 @@ class DoubleLinkedList<T> {
     }
 
     T shift() {
-        T value = first.value
-        first = first.next
         if (first) {
-            first.prev = null
+            T value = first.value
+            first = first.next
+            if (first) {
+                first.prev = null
+            } else {
+                last = null
+            }
+            value
+        } else {
+            throw new NoSuchElementException()
         }
-        value
     }
 
     T pop() {
-        T value = last.value
-        last = last.prev
         if (last) {
-            last.next = null
+            T value = last.value
+            last = last.prev
+            if (last) {
+                last.next = null
+            } else {
+                first = null
+            }
+            value
+        } else {
+            throw new EmptyStackException()
         }
-        value
     }
 
     void push(T value) {
