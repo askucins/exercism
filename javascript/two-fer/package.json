@@ -6,7 +6,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/exercism/javascript"
+    "url": "git+https://github.com/exercism/javascript.git"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -33,5 +33,11 @@
     "lint-test": "eslint . && jest --no-cache ./* "
   },
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/exercism/javascript/issues"
+  },
+  "homepage": "https://github.com/exercism/javascript#readme",
+  "main": "two-fer.js",
+  "keywords": []
 }
