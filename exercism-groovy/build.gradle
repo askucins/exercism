@@ -1,0 +1,88 @@
+plugins {
+    id 'com.github.erdi.idea-base' version '2.2'
+}
+
+wrapper {
+    gradleVersion = '8.4'
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+allprojects {
+    /*
+        Inspired by https://solidsoft.wordpress.com/2014/11/13/gradle-tricks-display-dependencies-for-all-subprojects-in-multi-project-build/
+        For example:
+        gw allDeps --configuration implementation
+        gw allDeps --configuration testImplementation
+        gw allDeps --configuration api
+    */
+    task allDeps(type: DependencyReportTask) {}
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+    apply plugin: 'groovy'
+    apply plugin: 'idea'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(11)
+        }
+    }
+
+    idea {
+        module {
+            downloadJavadoc = true
+            downloadSources = true
+        }
+    }
+
+    dependencies {
+        implementation 'org.apache.groovy:groovy-all:4.0.15'
+        implementation 'org.apache.groovy:groovy-json:4.0.15'
+        implementation 'org.apache.groovy:groovy-yaml:4.0.15'
+        implementation 'org.apache.groovy:groovy-xml:4.0.15'
+        implementation 'org.apache.groovy:groovy-ginq:4.0.15'
+        implementation 'org.slf4j:slf4j-api:2.0.7'
+        implementation 'ch.qos.logback:logback-classic:1.4.11'
+        def spockVersion = '2.4-M1-groovy-4.0'
+        testImplementation "org.spockframework:spock-core:${spockVersion}", {
+            exclude group: 'org.apache.groovy'
+        }
+    }
+
+    tasks.withType(GroovyCompile).configureEach {
+        options.incremental = true
+        doFirst {
+            logger.lifecycle 'Explicitly enabling incremental compilation in task: {}', it.name
+        }
+    }
+
+    //TODO read more about that 'configureEach' in https://docs.gradle.org/current/userguide/task_configuration_avoidance.html
+    //tasks.withType.configureEach(Test) {
+    tasks.withType(Test) {
+        // See https://blog.gradle.org/stop-rerunning-tests
+        systemProperty "random.testing.seed", new Random().nextInt()
+
+        testLogging {
+            showStandardStreams = true
+            events 'passed', 'failed'
+            exceptionFormat 'full'
+
+            debug {
+                events 'passed', 'skipped', 'failed'
+                showStackTraces true
+                exceptionFormat 'full'
+            }
+        }
+        useJUnitPlatform()
+    }
+
+    task removeTestResults(type: Delete) {
+        group = 'other'
+        description = 'removes reports and logs'
+        delete "reports"
+        delete "logs"
+    }
+}
