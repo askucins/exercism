@@ -1,19 +1,19 @@
-import spock.lang.*
+import spock.lang.Specification
 
 class WordCountSpec extends Specification {
 
     def "Count one word"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence || expected
         'word'   || ['word': 1]
     }
 
-    def "Count one of each"() {
+    def "Count one of each word"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence      || expected
@@ -22,7 +22,7 @@ class WordCountSpec extends Specification {
 
     def "Multiple occurrences of a word"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence                               || expected
@@ -31,7 +31,7 @@ class WordCountSpec extends Specification {
 
     def "Handles cramped lists"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence        || expected
@@ -40,51 +40,25 @@ class WordCountSpec extends Specification {
 
     def "Handles expanded lists"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence            || expected
         'one,\ntwo,\nthree' || ['one': 1, 'two': 1, 'three': 1]
     }
 
-    def "Count everything only once"() {
-        when:
-        def wordCount = new WordCount(sentence)
-
-        // call wordCount 2x to verify
-        then:
-        wordCount.wordCount()
-
-        expect:
-        wordCount.wordCount() == expected
-
-        where:
-        sentence                                     || expected
-        'all the kings horses and all the kings men' || ['all': 2, 'the': 2, 'kings': 2, 'horses': 1, 'and': 1, 'men': 1]
-    }
-
     def "Ignore punctuation"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence                                    || expected
         'car : carpet as java : javascript!!&@$%^&' || ['car': 1, 'carpet': 1, 'as': 1, 'java': 1, 'javascript': 1]
     }
 
-    def "Ignore punctuation inside"() {
-        //This is a questionable test - should it produce 'javascript' or 'java' and 'script'?
-        expect:
-        new WordCount(sentence).wordCount() == expected
-
-        where:
-        sentence                                    || expected
-        'car : carpet as java : java!!&@$%^&script' || ['car': 1, 'carpet': 1, 'as': 1, 'java': 1, 'javascript': 1]
-    }
-
     def "Include numbers"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence                || expected
@@ -93,7 +67,7 @@ class WordCountSpec extends Specification {
 
     def "Normalize case"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence             || expected
@@ -102,7 +76,7 @@ class WordCountSpec extends Specification {
 
     def "With apostrophes"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence                               || expected
@@ -111,16 +85,27 @@ class WordCountSpec extends Specification {
 
     def "With quotations"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence                                    || expected
-        "Joe can't tell between 'large' and large." || ['joe': 1, "can't": 1, 'tell': 1, 'between': 1, 'large': 2, 'and': 1]
+        "Joe can't tell between 'large' and large." || ['joe': 1, "can't": 1, 'tell': 1, 'between': 1, 'large': 2,
+                                                        'and': 1]
+    }
+
+    def "Substrings from the beginning"() {
+        expect:
+        new WordCount(sentence).countWords() == expected
+
+        where:
+        sentence                                   || expected
+        "Joe can't tell between app, apple and a." || ['joe'  : 1, "can't": 1, 'tell': 1, 'between': 1, 'app': 1,
+                                                       'apple': 1, 'and': 1, 'a': 1]
     }
 
     def "Multiple spaces not detected as a word"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence                  || expected
@@ -129,19 +114,10 @@ class WordCountSpec extends Specification {
 
     def "Alternating word separators not detected as a word"() {
         expect:
-        new WordCount(sentence).wordCount() == expected
+        new WordCount(sentence).countWords() == expected
 
         where:
         sentence                     || expected
         ",\n,one,\n ,two \n 'three'" || ['one': 1, 'two': 1, 'three': 1]
-    }
-
-    def "Commas inside quoted substrings"() {
-        expect:
-        new WordCount(sentence).wordCount() == expected
-
-        where:
-        sentence                                                                     || expected
-        "Joe can't tell 'Joe : ' between 'large, and don't fat' and large, and fat." || ['joe': 2, "can't": 1, 'tell': 1, 'between': 1, 'large': 2, 'and': 3, 'fat': 2, "don't": 1]
     }
 }

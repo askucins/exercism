@@ -8,7 +8,7 @@ class WordCount {
         graph = words.countBy { it } // Nice! (Based on community solutions)
     }
 
-    def wordCount() {
+    def countWords() {
         graph
     }
 
