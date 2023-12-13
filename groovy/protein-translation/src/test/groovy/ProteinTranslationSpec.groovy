@@ -137,7 +137,6 @@ class ProteinTranslationSpec extends Specification {
         'UGGUGUUAUUAAUGGUUU' || ['Tryptophan', 'Cysteine', 'Tyrosine']
     }
 
-    @Ignore
     @Unroll
     def "Translation fails if there is no proper codon present (#strand, #ex)"() {
         when:

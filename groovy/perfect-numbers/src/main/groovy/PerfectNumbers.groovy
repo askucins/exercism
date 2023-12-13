@@ -23,9 +23,8 @@ class PerfectNumbers {
         if (num == 1) {
             return 0 // special case
         } else {
-            List<Integer> factors = (1..Math.floor(num / 2).toInteger()).grep { num % it == 0 }
-            println "Factors of $num: $factors"
-            return factors.sum(0).toInteger()
+            List<Integer> factors = (1..(num.intdiv(2))).findAll { num % it == 0 }
+            return factors.sum() as int
         }
     }
 }
