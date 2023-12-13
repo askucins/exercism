@@ -1,6 +1,3 @@
-import groovy.transform.Canonical
-
-@Canonical
 class HighScores {
 
     List<Integer> scores
@@ -12,7 +9,12 @@ class HighScores {
     List<Integer> personalTopThree() {
         //scores.sort { a, b -> b <=> a }.subList(0, Math.min(3, scores.size()))
         // Based on community solutions
-        scores.sort().reverse().take(3)
+        //Gotcha! Only Lists are sorted in place (and we don't want to change the `scores`!)
+        scores.toArray().sort().reverse().take(3)
+    }
+
+    HighScores(List scores) {
+        this.scores = scores
     }
 
 }

@@ -1,0 +1,18 @@
+{
+  "blurb": "Manage a player's High Score list",
+  "authors": [
+    "amscotti"
+  ],
+  "files": {
+    "solution": [
+      "src/main/groovy/HighScores.groovy"
+    ],
+    "test": [
+      "src/test/groovy/HighScoresSpec.groovy"
+    ],
+    "example": [
+      ".meta/src/reference/groovy/HighScores.groovy"
+    ]
+  },
+  "source": "Tribute to the eighties' arcade game Frogger"
+}
