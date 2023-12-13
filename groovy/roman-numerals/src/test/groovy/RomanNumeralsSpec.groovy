@@ -1,4 +1,5 @@
-import spock.lang.*
+import spock.lang.Specification
+import spock.lang.Unroll
 
 class RomanNumeralsSpec extends Specification {
 
@@ -21,6 +22,7 @@ class RomanNumeralsSpec extends Specification {
         9      || 'IX'
         27     || 'XXVII'
         48     || 'XLVIII'
+        49     || 'XLIX'
         59     || 'LIX'
         93     || 'XCIII'
         141    || 'CXLI'
@@ -29,22 +31,8 @@ class RomanNumeralsSpec extends Specification {
         575    || 'DLXXV'
         911    || 'CMXI'
         1024   || 'MXXIV'
-        2874   || 'MMDCCCLXXIV'
         3000   || 'MMM'
+        3001   || 'MMMI'
+        3999   || 'MMMCMXCIX'
     }
-
-    @Unroll
-    def "Cannot convert number outside the scope (#arabic)"() {
-        when:
-        arabic.roman
-
-        then:
-        thrown(IllegalArgumentException)
-
-        where:
-        arabic | _
-        0      | _
-        3001   | _
-    }
-
 }
