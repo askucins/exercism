@@ -1,48 +1,41 @@
-import java.util.stream.IntStream
-
-import static org.apache.commons.math3.primes.Primes.nextPrime
-
-// I am a stinky cheater and I will use org.apache.commons.math3.primes.Primes.nextPrime
-
 class NthPrime {
-    static List<Integer> primes = [2]
 
-    static String status(String prefix) {
-        "$prefix: size:${primes.size()}, last:${primes.last()}"
+    //See: https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html
+    private static List<Integer> primesPrecomputedSmallerThan(Integer n) {
+        println "Precomputing primes smaller than: $n"
+        ArrayList<Boolean> isPrime = new ArrayList<Boolean>(n)
+        (0..n).each { isPrime[it] = true }
+        isPrime[0] = false
+        isPrime[1] = false
+        for (Integer i = 2; i * i <= n; i++) {
+            if (isPrime[i]) {
+                for (Integer j = i * i; j <= n; j += i) {
+                    isPrime[j] = false
+                }
+            }
+        }
+        (0..n).grep { isPrime[it] }
     }
+
+    // Approximation of the upper limit based on community solution
+    // See: https://exercism.org/tracks/groovy/exercises/nth-prime/solutions/glennj
+    // See: https://exercism.io/tracks/python/exercises/nth-prime/solutions/2a84e7330fab4b4cb04d92cf0f38164d
+    // See: https://en.wikipedia.org/wiki/Prime_number_theorem
+
+    private static int approximateNthPrime(int n) {
+        2 + Math.floor(1.2 * n * Math.log(n))
+    }
+
+    private static Integer defaultPrecomputedLimit = 1000
+
+    private static List<Integer> primes = primesPrecomputedSmallerThan(defaultPrecomputedLimit)
 
     static nth(int n) {
-        nthMine(n)
-        //nthCommunitySolution(n)
-    }
-
-    static nthMine(int n) {
         if (n < 1) {
             throw new ArithmeticException()
+        } else if (n > defaultPrecomputedLimit) {
+            primes = primesPrecomputedSmallerThan(approximateNthPrime(n) * 2) //Gotcha! with small overhead
         }
-        if (primes.size() >= n) {
-            return primes[(n - 1)]
-        }
-        while (primes.size() < n) {
-            primes.add(nextPrime(primes.last() + 1))
-            println status('G')
-        }
-        primes.last()
-    }
-
-    // And here a variant based on Kirill-Artamonov's solution
-    // https://exercism.io/tracks/groovy/exercises/nth-prime/solutions/27da92d4ca624d09b7304e8a4eddb529
-    // ... but apparently it requires JDK 9 (that .takeWhile())
-    static nthCommunitySolution(int n) {
-        if (n < 1)
-            throw new ArithmeticException()
-
-        Collection<Integer> primes = []
-        IntStream.iterate(2, { it + 1 })
-                .peek({ v ->
-                    if (!primes.any { p -> v % p == 0 }) primes.add v
-                }).takeWhile({ primes.size() < n })
-                .collect()
-        primes.last()
+        primes[n - 1]
     }
 }
