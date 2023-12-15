@@ -36,7 +36,7 @@ class RomanNumerals {
     RomanNumerals() {
         Integer.metaClass.getRoman = { ->
             Integer arabic = delegate as Integer
-            if (arabic < 1 || arabic > 3000) {
+            if (arabic < 1 || arabic > 3999) {
                 throw new IllegalArgumentException("$arabic is no romanizable!")
             }
 

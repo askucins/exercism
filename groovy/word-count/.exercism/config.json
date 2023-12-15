@@ -1,0 +1,23 @@
+{
+  "authors": [],
+  "contributors": [
+    "alexanderific",
+    "amscotti",
+    "ikhadykin",
+    "kytrinyx",
+    "sjwarner-bp"
+  ],
+  "files": {
+    "solution": [
+      "src/main/groovy/WordCount.groovy"
+    ],
+    "test": [
+      "src/test/groovy/WordCountSpec.groovy"
+    ],
+    "example": [
+      ".meta/src/reference/groovy/WordCount.groovy"
+    ]
+  },
+  "blurb": "Given a phrase, count the occurrences of each word in that phrase.",
+  "source": "This is a classic toy problem, but we were reminded of it by seeing it in the Go Tour."
+}

@@ -21,7 +21,7 @@ class PhoneNumber {
     private String subscriberCode
 
     PhoneNumber(String input) {
-        number = cleanUpNumber(input)
+        number = clean(input)
         areaCode = number.take(3)
         exchangeCode = number.drop(3).take(3)
         subscriberCode = number.drop(6).take(4)
@@ -32,23 +32,22 @@ class PhoneNumber {
         "(${areaCode}) ${exchangeCode}-${subscriberCode}"
     }
 
-    static String cleanUpNumber(String input) {
-        def defaultNumber = '0000000000'
+    static String clean(String input) {
         String number = input.replaceAll(/[^0-9]/, '')
         if (number.size() < 10) {
-            return defaultNumber
+            throw new Exception()
         }
         if (number.size() > 11) {
-            return defaultNumber
+            throw new Exception()
         }
         if (number.size() == 11 && number[0] != '1') {
-            return defaultNumber
+            throw new Exception()
         }
         if (number.size() == 11 && number[0] == '1') {
             number = number.drop(1)
         }
         if (['0', '1'].contains(number[0]) || ['0', '1'].contains(number[3])) {
-            return defaultNumber
+            throw new Exception()
         }
         return number
     }

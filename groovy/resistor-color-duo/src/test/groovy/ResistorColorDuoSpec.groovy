@@ -1,4 +1,4 @@
-import spock.lang.*
+import spock.lang.Specification
 
 class ResistorColorDuoSpec extends Specification {
 
@@ -36,5 +36,14 @@ class ResistorColorDuoSpec extends Specification {
         where:
         colors               || expected
         ['orange', 'orange'] || 33
+    }
+
+    def "Ignore additional colors"() {
+        expect:
+        ResistorColorDuo.value(colors) == expected
+
+        where:
+        colors                       || expected
+        ['green', 'brown', 'orange'] || 51
     }
 }

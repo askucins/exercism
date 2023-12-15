@@ -1,6 +1,3 @@
-import groovy.util.logging.Slf4j
-
-@Slf4j
 class RobotName {
     private static Random random = new Random()
     static Set names = []
@@ -16,7 +13,7 @@ class RobotName {
 
     def provisionName() {
         String newName = randomName()
-        log.debug "Old name: $name, new name: $newName; Number of used names: ${names.size()}"
+        println  "[debug] Old name: $name, new name: $newName; Number of used names: ${names.size()}"
         if (names.contains(newName)) {
             throw new IllegalArgumentException("Name: $newName is already used!")
         } else {

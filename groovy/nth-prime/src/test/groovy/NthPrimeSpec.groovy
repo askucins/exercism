@@ -1,24 +1,6 @@
-import spock.lang.*
+import spock.lang.Specification
 
-@Stepwise
 class NthPrimeSpec extends Specification {
-
-    def setup() {
-        println NthPrime.status('B')
-    }
-
-    def cleanup() {
-        println NthPrime.status('A')
-    }
-
-    def "Can calculate a big prime first"() {
-        expect:
-        NthPrime.nth(number) == expected
-
-        where:
-        number || expected
-        10001  || 104743
-    }
 
     def "Can calculate the first prime"() {
         expect:
@@ -47,24 +29,6 @@ class NthPrimeSpec extends Specification {
         6      || 13
     }
 
-    def "Can calculate the seventh prime"() {
-        expect:
-        NthPrime.nth(number) == expected
-
-        where:
-        number || expected
-        7      || 17
-    }
-
-    def "Can calculate the sixth prime again"() {
-        expect:
-        NthPrime.nth(number) == expected
-
-        where:
-        number || expected
-        6      || 13
-    }
-
     def "Can calculate a big prime"() {
         expect:
         NthPrime.nth(number) == expected
@@ -72,15 +36,7 @@ class NthPrimeSpec extends Specification {
         where:
         number || expected
         10001  || 104743
-    }
-
-    def "Can calculate even bigger prime"() {
-        expect:
-        NthPrime.nth(number) == expected
-
-        where:
-        number || expected
-        10005  || 104779
+        10002  || 104759
     }
 
     def "Throws exception when asked for the zeroth prime"() {

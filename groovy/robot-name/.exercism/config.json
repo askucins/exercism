@@ -1,0 +1,24 @@
+{
+  "authors": [],
+  "contributors": [
+    "alexanderific",
+    "amscotti",
+    "chriseyre2000",
+    "Dispader",
+    "ikhadykin",
+    "kytrinyx"
+  ],
+  "files": {
+    "solution": [
+      "src/main/groovy/RobotName.groovy"
+    ],
+    "test": [
+      "src/test/groovy/RobotNameSpec.groovy"
+    ],
+    "example": [
+      ".meta/src/reference/groovy/RobotName.groovy"
+    ]
+  },
+  "blurb": "Manage robot factory settings.",
+  "source": "A debugging session with Paul Blackwell at gSchool."
+}
