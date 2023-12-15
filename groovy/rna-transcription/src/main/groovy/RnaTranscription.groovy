@@ -1,10 +1,10 @@
 class RnaTranscription {
 
-    def ofDNA(strand) {
+    static toRna(strand) {
         transcriptDnaToRna(strand)
     }
 
-    def mineSolution(strand) {
+    static mineSolution(strand) {
         strand.collect { nucleotide ->
             def value = ''
             switch (nucleotide) {
@@ -28,7 +28,7 @@ class RnaTranscription {
     }
 
     // Based on community solution - that .withDefault is pretty awesome!
-    def transcriptDnaToRna(String strand) {
+    static def transcriptDnaToRna(String strand) {
         def d2r = ['G': 'C', 'C': 'G', 'T': 'A', 'A': 'U'].withDefault { throw new IllegalArgumentException() }
         strand.collect { d2r[(it)] }.join()
     }
