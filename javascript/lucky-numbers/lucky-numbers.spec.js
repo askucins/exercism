@@ -1,4 +1,4 @@
-import { twoSum, luckyNumber, errorMessage } from './lucky-numbers';
+import {errorMessage, luckyNumber, twoSum} from './lucky-numbers';
 
 describe('twoSum', () => {
   test('sums the numbers correctly for short arrays', () => {

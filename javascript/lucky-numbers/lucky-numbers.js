@@ -8,7 +8,17 @@
  * @returns {number} sum of the two arrays
  */
 export function twoSum(array1, array2) {
-  throw new Error('Implement the twoSum function');
+  return Number(array1.join('')) + Number(array2.join(''));
+}
+
+/**
+ * Reverses string based on https://www.freecodecamp.org/news/how-to-reverse-a-string-in-javascript-in-3-different-ways-75e4763c68cb/
+ *
+ * @param {string} value
+ * @returns {string} reversed value
+ */
+function reverse(value) {
+  return value?.split('').reverse().join('') ?? ''
 }
 
 /**
@@ -18,7 +28,8 @@ export function twoSum(array1, array2) {
  * @returns {boolean} whether the number is a palindrome or not
  */
 export function luckyNumber(value) {
-  throw new Error('Implement the luckyNumber function');
+  let numberAsString = String(value);
+  return numberAsString === reverse(numberAsString);
 }
 
 /**
@@ -29,5 +40,26 @@ export function luckyNumber(value) {
  * @returns {string} error message
  */
 export function errorMessage(input) {
-  throw new Error('Implement the errorMessage function');
+  // let result;
+  // if (input === undefined || input === null || input === '') {
+  //   result = 'Required field';
+  // } else if (isNaN(Number(input)) || Number(input) === 0) {
+  //   result = 'Must be a number besides 0'
+  // } else {
+  //   result = '';
+  // }
+  // return result;
+
+  // Based on a community solution
+  // See: https://exercism.org/tracks/javascript/exercises/lucky-numbers/solutions/ghjk
+
+  let result;
+  if (!input) {
+    result = 'Required field';
+  } else if (input > 0) {
+    result = '';
+  } else {
+    result = 'Must be a number besides 0'
+  }
+  return result;
 }
