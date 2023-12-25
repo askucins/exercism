@@ -44,7 +44,7 @@ export function preparationTime (layers, layerPreparationTime = 2) {
  * Calculates quantities of sauce and noodles
  *
  * @param {string[]} layers
- * @returns {object} quantities of sauce and noodles
+ * @returns {Object} quantities of sauce and noodles
  */
 export function quantities (layers) {
   const result = {
@@ -79,9 +79,9 @@ export function addSecretIngredient (friendsIngredients, yourIngredients) {
 /**
  * Scales recipe for more portions
  *
- * @param {object} recipe
+ * @param {Object} recipe
  * @param {number} numberOfPortions
- * @returns {object} scaled recipe
+ * @returns {Object} scaled recipe
  */
 export function scaleRecipe (recipe, numberOfPortions) {
   const scale = numberOfPortions / 2
