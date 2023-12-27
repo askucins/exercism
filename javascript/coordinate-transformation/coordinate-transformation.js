@@ -14,8 +14,10 @@
  * @returns {function} a function which takes an x, y parameter, returns the
  *  translated coordinate pair in the form [x, y]
  */
-export function translate2d(dx, dy) {
-  throw new Error('Implement the translate2d function');
+export function translate2d (dx, dy) {
+  return function (x, y) {
+    return [x + dx, y + dy]
+  }
 }
 
 /**
@@ -28,8 +30,10 @@ export function translate2d(dx, dy) {
  * @returns {function} a function which takes an x, y parameter, returns the
  *  scaled coordinate pair in the form [x, y]
  */
-export function scale2d(sx, sy) {
-  throw new Error('Implement the scale2d function');
+export function scale2d (sx, sy) {
+  return function (x, y) {
+    return [x * sx, y * sy]
+  }
 }
 
 /**
@@ -42,8 +46,10 @@ export function scale2d(sx, sy) {
  * @returns {function} a function which takes an x, y parameter, returns the
  *  transformed coordinate pair in the form [x, y]
  */
-export function composeTransform(f, g) {
-  throw new Error('Implement the composeTransform function');
+export function composeTransform (f, g) {
+  return function (x, y) {
+    return g(...f(x, y))
+  }
 }
 
 /**
@@ -55,6 +61,14 @@ export function composeTransform(f, g) {
  * @returns {function} a function which takes x and y arguments, and will either return the saved result
  *  if the arguments are the same on subsequent calls, or compute a new result if they are different.
  */
-export function memoizeTransform(f) {
-  throw new Error('Implement the memoizeTransform function');
+export function memoizeTransform (f) {
+  let lastX, lastY, lastResult
+  return function (x, y) {
+    if (x !== lastX || y !== lastY) {
+      lastX = x
+      lastY = y
+      lastResult = f(x, y)
+    }
+    return lastResult
+  }
 }
