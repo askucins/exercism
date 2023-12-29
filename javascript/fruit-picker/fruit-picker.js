@@ -33,7 +33,7 @@ export function onError() {
  * @return void
  */
 export function orderFromGrocer(query, onSuccessCallback, onErrorCallback) {
-  return order(query, onSuccess, onError)
+  return order(query, onSuccessCallback, onErrorCallback)
 }
 
 /**
